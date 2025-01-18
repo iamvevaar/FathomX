@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Fathom Player Enhancer",
+  "version": "1.0",
+  "description": "Enhances Fathom video player controls to be more like YouTube",
+  "permissions": ["scripting"],
+  "host_permissions": ["*://*.fathom.video/*"],
+  "content_scripts": [
+    {
+      "matches": ["*://*.fathom.video/*"],
+      "css": ["styles.css"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [{
+    "resources": ["icons/*"],
+    "matches": ["*://*.fathom.video/*"]
+  }]
+}
