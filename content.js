@@ -132,7 +132,7 @@ function enhanceVideoPlayer(videoPlayer) {
               display: flex;
               align-items: center;
               justify-content: center;
-              font-size: 24px;
+              font-size: 16px;
               transition: transform 0.2s, background-color 0.2s;
               pointer-events: auto;
           }
