@@ -16,8 +16,21 @@
       const video = videoPlayer.querySelector('video');
       if (!video) return;
   
+     // Remove Fathom's default controls
       const defaultControls = videoPlayer.querySelectorAll('section.absolute, .text-white.cursor-pointer.absolute.inset-0');
       defaultControls.forEach(control => control.remove());
+
+       // Create loading overlay
+    const loadingOverlay = document.createElement('div');
+    loadingOverlay.className = 'video-loading-overlay';
+    loadingOverlay.innerHTML = `
+        <div class="loading-spinner">
+            <svg class="spinner-svg" viewBox="0 0 50 50">
+                <circle class="spinner-path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+            </svg>
+        </div>
+    `;
+    videoPlayer.appendChild(loadingOverlay);
   
       // Create central overlay controls
       const centerControls = document.createElement('div');
@@ -258,8 +271,72 @@
               transform: scale(1.1);
               background: rgba(0, 0, 0, 0.8);
           }
-      `;
-      document.head.appendChild(style);
+     .video-loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 2500;
+        }
+
+        .video-loading-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            animation: spinner-scale 0.3s ease-in-out;
+        }
+
+        .spinner-svg {
+            animation: spinner-rotate 1s linear infinite;
+            transform-origin: center center;
+        }
+
+        .spinner-path {
+            stroke: #ffffff;
+            stroke-dasharray: 150;
+            stroke-dashoffset: 0;
+            transform-origin: center;
+            stroke-linecap: round;
+            animation: spinner-dash 1.5s ease-in-out infinite;
+        }
+
+        @keyframes spinner-rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes spinner-dash {
+            0% {
+                stroke-dasharray: 1, 150;
+                stroke-dashoffset: 0;
+            }
+            50% {
+                stroke-dasharray: 90, 150;
+                stroke-dashoffset: -35;
+            }
+            100% {
+                stroke-dasharray: 90, 150;
+                stroke-dashoffset: -124;
+            }
+        }
+
+        @keyframes spinner-scale {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    `;
+    document.head.appendChild(style);
   
       // Get control elements
       const playPauseBtn = bottomControls.querySelector('.play-pause');
@@ -282,6 +359,58 @@
       let originalSpeed = 1;
       let longPressTimeout;
       let isHolding = false;
+
+       // Loading state management
+    let isLoading = false;
+    let loadingTimeout;
+
+    function showLoading() {
+        clearTimeout(loadingTimeout);
+        if (!isLoading) {
+            isLoading = true;
+            loadingOverlay.classList.add('visible');
+        }
+    }
+
+    function hideLoading() {
+        // Add a small delay before hiding to prevent flickering
+        clearTimeout(loadingTimeout);
+        loadingTimeout = setTimeout(() => {
+            isLoading = false;
+            loadingOverlay.classList.remove('visible');
+        }, 200);
+    }
+
+    // Add loading state event listeners
+    video.addEventListener('waiting', showLoading);
+    video.addEventListener('seeking', showLoading);
+    video.addEventListener('playing', hideLoading);
+    video.addEventListener('canplay', hideLoading);
+    video.addEventListener('seeked', hideLoading);
+    video.addEventListener('error', showLoading);
+
+    if (progressBar) {
+        const originalClickHandler = progressBar.onclick;
+        progressBar.onclick = (e) => {
+            showLoading();
+            if (originalClickHandler) originalClickHandler(e);
+        };
+    }
+
+    if (progressBar) {
+        progressBar.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            showLoading();
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                // Keep loading visible until video is ready
+            }
+        });
+    }
+
   
       // Play/Pause functionality
       function updatePlayButton() {
@@ -472,10 +601,12 @@
                   break;
               case 'arrowleft':  // Rewind 10 seconds
                   e.preventDefault();
+                  showLoading();
                   video.currentTime = Math.max(0, video.currentTime - 10);
                   break;
               case 'arrowright':  // Forward 10 seconds
                   e.preventDefault();
+                  showLoading();
                   video.currentTime = Math.min(video.duration, video.currentTime + 10);
                   break;
               case 'm':  // Mute
@@ -496,6 +627,11 @@
           }
           fullscreenBtn.click();
       });
+      
+       // Initial loading state check
+    if (video.readyState < 4) {
+        showLoading();
+    }
   
       // Add video event listeners
       video.addEventListener('play', updatePlayButton);
