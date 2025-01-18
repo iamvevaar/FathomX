@@ -500,43 +500,65 @@
           video.muted = false;
       });
   
-      progressBar.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const rect = progressBar.getBoundingClientRect();
-          const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-          video.currentTime = pos * video.duration;
-      });
+     // 1. First, modify the progress bar click handler
+progressBar.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const rect = progressBar.getBoundingClientRect();
+    const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    
+    // Store if video was playing
+    const wasPlaying = !video.paused;
+    
+    showLoading();
+    video.currentTime = pos * video.duration;
+
+    // Resume playback after seeking if it was playing before
+    video.addEventListener('seeked', () => {
+        if (wasPlaying) {
+            video.play();
+        }
+        hideLoading();
+    }, { once: true });
+});
   
       // Progress bar drag functionality
       let isDragging = false;
-      
+      let wasPlaying = false;
+
       progressBar.addEventListener('mousedown', (e) => {
-          isDragging = true;
-          wasPaused = video.paused;
-          video.pause();
-          updateProgressFromMouse(e);
-      });
+        isDragging = true;
+        wasPlaying = !video.paused;  // Store the playing state
+        updateProgressFromMouse(e);
+        showLoading();
+    });
+     document.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+        updateProgressFromMouse(e);
+        showLoading();
+    }
+});
   
-      document.addEventListener('mousemove', (e) => {
-          if (isDragging) {
-              updateProgressFromMouse(e);
-          }
-      });
+document.addEventListener('mouseup', () => {
+    if (isDragging) {
+        isDragging = false;
+        
+        // Add event listener for when seeking completes
+        video.addEventListener('seeked', () => {
+            if (wasPlaying) {
+                video.play();
+            }
+            hideLoading();
+        }, { once: true });
+    }
+});
   
-      document.addEventListener('mouseup', () => {
-          if (isDragging) {
-              isDragging = false;
-              if (!wasPaused) video.play();
-          }
-      });
-  
-      function updateProgressFromMouse(e) {
-          const rect = progressBar.getBoundingClientRect();
-          const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-          video.currentTime = pos * video.duration;
-          progressFill.style.width = `${pos * 100}%`;
-          currentTimeDisplay.textContent = formatTime(video.currentTime);
-      }
+function updateProgressFromMouse(e) {
+    const rect = progressBar.getBoundingClientRect();
+    const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    video.currentTime = pos * video.duration;
+    progressFill.style.width = `${pos * 100}%`;
+    currentTimeDisplay.textContent = formatTime(video.currentTime);
+}
   
       function updateProgress() {
           if (!isDragging) {
