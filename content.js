@@ -498,8 +498,39 @@ function enhanceVideoPlayer(videoPlayer) {
     }
   });
 
+  // First, let's add variables to track volume dragging state
+let isVolumeDragging = false;
+
+// Add mouse down event to start dragging
+volumeTrack.addEventListener('mousedown', (e) => {
+    isVolumeDragging = true;
+    updateVolumeFromMouse(e);
+});
+
+// Add mousemove event to track dragging
+document.addEventListener('mousemove', (e) => {
+    if (isVolumeDragging) {
+        updateVolumeFromMouse(e);
+    }
+});
+
+// Add mouseup event to stop dragging
+document.addEventListener('mouseup', () => {
+    isVolumeDragging = false;
+});
+
+  // Function to update volume based on mouse position
+function updateVolumeFromMouse(e) {
+    const rect = volumeTrack.getBoundingClientRect();
+    const newVolume = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    video.volume = newVolume;
+    video.muted = false;  // Unmute when adjusting volume
+    volumeFill.style.width = `${newVolume * 100}%`;
+}
+
   volumeTrack.addEventListener("click", (e) => {
     e.stopPropagation();
+    updateVolumeFromMouse(e);
     const rect = volumeTrack.getBoundingClientRect();
     const newVolume = Math.max(
       0,
