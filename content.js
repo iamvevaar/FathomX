@@ -38,9 +38,32 @@ function enhanceVideoPlayer(videoPlayer) {
   centerControls.className = "center-overlay-controls";
   centerControls.innerHTML = `
           <div class="control-group">
-              <button class="control-button rewind-10">⏪</button>
-              <button class="control-button play-pause-large">▶️</button>
-              <button class="control-button forward-10">⏩</button>
+              <button class="control-button rewind-10">
+              
+<svg width="24" height="24" viewBox="0 0 216 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M88.8 43.8431C92 45.6906 92 50.3094 88.8 52.1569L31.2 85.4123C28 87.2598 24 84.9504 24 81.2554L24 14.7446C24 11.0496 28 8.74018 31.2 10.5877L88.8 43.8431Z" fill="white"/>
+<path d="M40.3444 154.25C37.2456 156.472 36.517 160.803 38.9475 163.741C50.7433 178.001 66.2987 188.745 83.9117 194.712C103.71 201.42 125.113 201.754 145.111 195.669C165.109 189.584 182.698 177.384 195.404 160.786C208.111 144.187 215.297 124.024 215.951 103.131C216.605 82.2374 210.696 61.6641 199.053 44.3029C187.41 26.9417 170.62 13.6655 151.042 6.34055C131.463 -0.984429 110.082 -1.98989 89.9023 3.46549C71.9505 8.31869 55.7531 18.0681 43.0879 31.5614C40.4783 34.3416 40.9344 38.7098 43.888 41.1214V41.1214C46.8417 43.533 51.1719 43.0715 53.8121 40.3203C64.6292 29.0484 78.3413 20.8951 93.506 16.7954C110.899 12.0933 129.328 12.9599 146.203 19.2734C163.078 25.587 177.55 37.0299 187.585 51.9938C197.62 66.9577 202.713 84.6902 202.149 102.699C201.585 120.707 195.392 138.086 184.44 152.392C173.488 166.699 158.328 177.214 141.091 182.459C123.854 187.704 105.407 187.415 88.3426 181.634C73.4642 176.593 60.2893 167.597 50.1988 155.671C47.736 152.759 43.4431 152.028 40.3444 154.25V154.25Z" fill="white"/>
+<path d="M93.2175 65.6121V143H83.8464V75.4367H83.3929L64.4994 87.982V78.4597L83.8464 65.6121H93.2175ZM140.716 144.058C135.023 144.058 130.173 142.509 126.168 139.41C122.162 136.286 119.102 131.765 116.986 125.845C114.87 119.9 113.811 112.72 113.811 104.306C113.811 95.9425 114.87 88.8007 116.986 82.8808C119.127 76.9356 122.2 72.4012 126.206 69.2774C130.236 66.1285 135.073 64.554 140.716 64.554C146.359 64.554 151.183 66.1285 155.188 69.2774C159.219 72.4012 162.292 76.9356 164.408 82.8808C166.55 88.8007 167.62 95.9425 167.62 104.306C167.62 112.72 166.562 119.9 164.446 125.845C162.33 131.765 159.269 136.286 155.264 139.41C151.258 142.509 146.409 144.058 140.716 144.058ZM140.716 135.745C146.359 135.745 150.742 133.024 153.866 127.583C156.99 122.142 158.551 114.383 158.551 104.306C158.551 97.6051 157.833 91.8993 156.398 87.1885C154.987 82.4777 152.946 78.8879 150.276 76.4192C147.631 73.9504 144.444 72.7161 140.716 72.7161C135.123 72.7161 130.753 75.4745 127.604 80.9914C124.455 86.4831 122.88 94.2547 122.88 104.306C122.88 111.007 123.586 116.7 124.996 121.386C126.407 126.071 128.435 129.636 131.08 132.08C133.75 134.523 136.962 135.745 140.716 135.745Z" fill="white"/>
+</svg>
+
+              </button>
+              
+              <button class="control-button play-pause-large">
+              
+<svg width="24" height="24" viewBox="0 0 138 156" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M131.1 67.0881C139.5 71.9378 139.5 84.0622 131.1 88.9119L18.9 153.691C10.5 158.54 0 152.478 0 142.779L0 13.2213C0 3.52181 10.5 -2.54036 18.9 2.30938L131.1 67.0881Z" fill="white"/>
+</svg>
+
+              </button>
+              <button class="control-button forward-10">
+              
+<svg width="24" height="24" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M115.979 44.9641C113.733 46.3647 113.733 49.6353 115.979 51.0359L172.306 86.158C174.689 87.6439 177.777 85.9304 177.777 83.122V12.878C177.777 10.0696 174.689 8.35608 172.306 9.84204L115.979 44.9641Z" fill="white"/>
+<path d="M163.022 154.543C165.737 156.645 166.387 160.504 164.316 163.243C153.349 177.751 138.801 188.675 122.304 194.712C103.972 201.42 84.1549 201.754 65.6379 195.669C47.1209 189.584 30.8351 177.384 19.0698 160.786C7.30451 144.187 0.651251 124.024 0.045256 103.131C-0.560739 82.2374 4.911 61.6641 15.6913 44.3029C26.4717 26.9417 42.0185 13.6655 60.1466 6.34055C78.2747 -0.984429 98.0724 -1.98989 116.757 3.46549C133.559 8.37131 148.702 18.28 160.484 32.0016C162.727 34.6142 162.318 38.5151 159.736 40.7927V40.7927C156.862 43.3266 152.456 42.8618 149.897 40.0106C139.925 28.899 127.333 20.8574 113.42 16.7954C97.3157 12.0933 80.2517 12.9599 64.6269 19.2734C49.002 25.587 35.6019 37.0299 26.3102 51.9938C17.0184 66.9577 12.3022 84.6902 12.8246 102.699C13.3469 120.707 19.0814 138.086 29.2221 152.392C39.3628 166.699 53.3998 177.214 69.3599 182.459C85.32 187.704 102.401 187.415 118.201 181.634C131.876 176.63 143.997 167.729 153.313 155.933C155.673 152.945 160.012 152.212 163.022 154.543V154.543Z" fill="white"/>
+<path d="M60.2175 65.6121V143H50.8464V75.4367H50.3929L31.4994 87.982V78.4597L50.8464 65.6121H60.2175ZM107.716 144.058C102.023 144.058 97.1733 142.509 93.1679 139.41C89.1624 136.286 86.1017 131.765 83.9856 125.845C81.8695 119.9 80.8115 112.72 80.8115 104.306C80.8115 95.9425 81.8695 88.8007 83.9856 82.8808C86.1269 76.9356 89.2002 72.4012 93.2057 69.2774C97.2363 66.1285 102.073 64.554 107.716 64.554C113.359 64.554 118.183 66.1285 122.188 69.2774C126.219 72.4012 129.292 76.9356 131.408 82.8808C133.55 88.8007 134.62 95.9425 134.62 104.306C134.62 112.72 133.562 119.9 131.446 125.845C129.33 131.765 126.269 136.286 122.264 139.41C118.258 142.509 113.409 144.058 107.716 144.058ZM107.716 135.745C113.359 135.745 117.742 133.024 120.866 127.583C123.99 122.142 125.551 114.383 125.551 104.306C125.551 97.6051 124.833 91.8993 123.398 87.1885C121.987 82.4777 119.946 78.8879 117.276 76.4192C114.631 73.9504 111.444 72.7161 107.716 72.7161C102.123 72.7161 97.7527 75.4745 94.6038 80.9914C91.4549 86.4831 89.8804 94.2547 89.8804 104.306C89.8804 111.007 90.5858 116.7 91.9965 121.386C93.4072 126.071 95.4351 129.636 98.0802 132.08C100.75 134.523 103.962 135.745 107.716 135.745Z" fill="white"/>
+</svg>
+
+              </button>
           </div>
       `;
   videoPlayer.appendChild(centerControls);
@@ -125,8 +148,8 @@ function enhanceVideoPlayer(videoPlayer) {
               background: rgba(0, 0, 0, 0.7);
               border: none;
               color: white;
-              width: 48px;
-              height: 48px;
+              width: 44px;
+              height: 44px;
               border-radius: 50%;
               cursor: pointer;
               display: flex;
@@ -349,7 +372,7 @@ function enhanceVideoPlayer(videoPlayer) {
   const volumeFill = bottomControls.querySelector(".volume-fill");
   const progressBar = bottomControls.querySelector(".progress-bar");
   const progressFill = bottomControls.querySelector(".progress-fill");
-  const progressHandle = bottomControls.querySelector('.progress-handle');
+  const progressHandle = bottomControls.querySelector(".progress-handle");
   const currentTimeDisplay = bottomControls.querySelector(".current-time");
   const totalTimeDisplay = bottomControls.querySelector(".total-time");
   const speedBtn = bottomControls.querySelector(".speed");
@@ -499,34 +522,37 @@ function enhanceVideoPlayer(videoPlayer) {
   });
 
   // First, let's add variables to track volume dragging state
-let isVolumeDragging = false;
+  let isVolumeDragging = false;
 
-// Add mouse down event to start dragging
-volumeTrack.addEventListener('mousedown', (e) => {
+  // Add mouse down event to start dragging
+  volumeTrack.addEventListener("mousedown", (e) => {
     isVolumeDragging = true;
     updateVolumeFromMouse(e);
-});
+  });
 
-// Add mousemove event to track dragging
-document.addEventListener('mousemove', (e) => {
+  // Add mousemove event to track dragging
+  document.addEventListener("mousemove", (e) => {
     if (isVolumeDragging) {
-        updateVolumeFromMouse(e);
+      updateVolumeFromMouse(e);
     }
-});
+  });
 
-// Add mouseup event to stop dragging
-document.addEventListener('mouseup', () => {
+  // Add mouseup event to stop dragging
+  document.addEventListener("mouseup", () => {
     isVolumeDragging = false;
-});
+  });
 
   // Function to update volume based on mouse position
-function updateVolumeFromMouse(e) {
+  function updateVolumeFromMouse(e) {
     const rect = volumeTrack.getBoundingClientRect();
-    const newVolume = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    const newVolume = Math.max(
+      0,
+      Math.min(1, (e.clientX - rect.left) / rect.width)
+    );
     video.volume = newVolume;
-    video.muted = false;  // Unmute when adjusting volume
+    video.muted = false; // Unmute when adjusting volume
     volumeFill.style.width = `${newVolume * 100}%`;
-}
+  }
 
   volumeTrack.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -605,12 +631,12 @@ function updateVolumeFromMouse(e) {
     video.currentTime = pos * video.duration;
     const progress = pos * 100;
     progressFill.style.width = `${progress}%`;
-    
+
     // Add this line to update the handle position while dragging
     progressHandle.style.left = `${progress}%`;
-    
+
     currentTimeDisplay.textContent = formatTime(video.currentTime);
-}
+  }
 
   function updateProgress() {
     if (!isDragging) {
