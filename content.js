@@ -47,7 +47,7 @@ function enhanceVideoPlayer(videoPlayer) {
 </svg>
 
               </button>
-              
+
               <button class="control-button play-pause-large">
               
 <svg width="24" height="24" viewBox="0 0 138 156" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -184,7 +184,7 @@ function enhanceVideoPlayer(videoPlayer) {
           }
   
           .progress-bar {
-              height: 3px;
+              height: 6px;
               background: rgba(255, 255, 255, 0.2);
               position: relative;
               cursor: pointer;
@@ -442,7 +442,9 @@ function enhanceVideoPlayer(videoPlayer) {
     playPauseBtn.innerHTML = isPlaying
       ? '<svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>'
       : '<svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>';
-    playPauseLarge.textContent = isPlaying ? "⏸️" : "▶️";
+    playPauseLarge.innerHTML = isPlaying
+      ? '<svg viewBox="0 0 24 24" width="64" height="64"><path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>'
+      : '<svg viewBox="0 0 24 24" width="64" height="64"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>';
   }
 
   function togglePlay(e) {
